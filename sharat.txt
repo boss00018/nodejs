@@ -1,101 +1,90 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+Setup instructions for both programs
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
+Program A: HTML validation pages
+- File: program-a.html
+- Open this file directly in your browser.
+- It includes registration, login, cart, and thank-you pages in one file.
+- Fill the form and submit to see client-side validation and page flow.
 
-const SECRET_KEY = "mysecretkey";
+Program B: React TODO app
+- Folder: todo-app
+npm create vite@latest todo-app -- --template react
+- Main component file: src/App.jsx
+- To run:
+  1. Open terminal in e:\nodejs\todo-app
+  2. Run: npm install
+  3. Run: npm run dev
+  4. Open the local URL shown by Vite, usually http://localhost:5173
+- The app supports add, complete, and remove tasks.
 
-// Dummy user (for login)
-const USER = {
-    username: "admin",
-    password: "1234"
-};
-
-// In-memory student data
-let students = [
-    { id: 1, name: "Sai", age: 20 },
-    { id: 2, name: "Ravi", age: 21 }
-];
+Use `sharat.txt` as the setup guide for both programs.
 
 
-// ================= JWT Middleware =================
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Extract token
+import React, { useState } from 'react';
 
-    if (!token) {
-        return res.status(403).json({ message: "Token required" });
+function TodoApp() {
+  const [task, setTask] = useState('');
+  const [list, setList] = useState([]);
+
+  const addTask = () => {
+    const text = task.trim();
+    if (!text) {
+      alert('Add a task');
+      return;
     }
+    setList([...list, { text, done: false }]);
+    setTask('');
+  };
 
-    jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) {
-            return res.status(401).json({ message: "Invalid Token" });
-        }
-        req.user = user;
-        next();
-    });
+  const removeTask = index => {
+    setList(list.filter((_, i) => i !== index));
+  };
+
+  const completeTask = index => {
+    setList(list.map((item, i) =>
+      i === index ? { ...item, done: true } : item
+    ));
+  };
+
+  return (
+    <div style={{ fontFamily: 'sans-serif', maxWidth: 400, margin: '0 auto' }}>
+      <h2>React TODO</h2>
+      <div>
+        <input
+          value={task}
+          onChange={e => setTask(e.target.value)}
+          placeholder="New task"
+          style={{ width: '70%', padding: 8 }}
+        />
+        <button onClick={addTask} style={{ padding: '8px 12px', marginLeft: 8 }}>
+          Add
+        </button>
+      </div>
+      <p>Tasks: {list.length}</p>
+      <ul style={{ paddingLeft: 20 }}>
+        {list.map((item, index) => (
+          <li key={index} style={{ marginBottom: 8 }}>
+            <span style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+              {item.text}
+            </span>
+            <button
+              onClick={() => completeTask(index)}
+              disabled={item.done}
+              style={{ marginLeft: 8 }}
+            >
+              {item.done ? 'Done' : 'Complete'}
+            </button>
+            <button
+              onClick={() => removeTask(index)}
+              style={{ marginLeft: 8 }}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-
-// ================= Login API =================
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-
-    if (username === USER.username && password === USER.password) {
-        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
-        res.json({ token });
-    } else {
-        res.status(401).json({ message: "Invalid credentials" });
-    }
-});
-
-
-// ================= Protected CRUD APIs =================
-// GET all students
-app.get('/students', authenticateToken, (req, res) => {
-    res.json(students);
-});
-
-// GET student by ID
-app.get('/students/:id', authenticateToken, (req, res) => {
-    const student = students.find(s => s.id == req.params.id);
-    res.json(student);
-});
-
-// CREATE student
-app.post('/students', authenticateToken, (req, res) => {
-    const newStudent = {
-        id: students.length + 1,
-        name: req.body.name,
-        age: req.body.age
-    };
-    students.push(newStudent);
-    res.json(newStudent);
-});
-
-// UPDATE student
-app.put('/students/:id', authenticateToken, (req, res) => {
-    let student = students.find(s => s.id == req.params.id);
-    if (student) {
-        student.name = req.body.name;
-        student.age = req.body.age;
-        res.json(student);
-    } else {
-        res.status(404).json({ message: "Student not found" });
-    }
-});
-
-// DELETE student
-app.delete('/students/:id', authenticateToken, (req, res) => {
-    students = students.filter(s => s.id != req.params.id);
-    res.json({ message: "Student deleted" });
-});
-
-// ================= Server =================
-app.listen(3030, () => {
-    console.log("Server running on http://localhost:3030");
-});
+export default TodoApp;

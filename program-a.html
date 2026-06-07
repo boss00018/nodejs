@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration, Login and Cart</title>
+
+    <script>
+        function validateRegistration() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("regpwd").value;
+
+            if(name=="" || email=="" || password=="") {
+                alert("All Registration fields are required");
+                return false;
+            }
+
+            alert("Registration Successful");
+
+            document.getElementById("registration").style.display="none";
+            document.getElementById("login").style.display="block";
+
+            return false;
+        }
+
+        function validateLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("loginpwd").value;
+
+            if(username=="" || password=="") {
+                alert("Enter Username and Password");
+                return false;
+            }
+
+            alert("Login Successful");
+
+            document.getElementById("login").style.display="none";
+            document.getElementById("cart").style.display="block";
+
+            return false;
+        }
+
+        function validateCart() {
+            var qty = document.getElementById("qty").value;
+
+            if(qty=="" || qty<=0) {
+                alert("Enter Valid Quantity");
+                return false;
+            }
+
+            alert("Item Added To Cart Successfully");
+            document.getElementById("cart").style.display="none";
+            document.getElementById("thankyou").style.display="block";
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+
+
+    <div id="registration">
+        <h2>Registration Page</h2>
+
+        <form onsubmit="return validateRegistration()">
+            Name:
+            <input type="text" id="name"><br><br>
+
+            Email:
+            <input type="email" id="email"><br><br>
+
+            Password:
+            <input type="password" id="regpwd"><br><br>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+
+
+    <div id="login" style="display:none;">
+        <h2>Login Page</h2>
+
+        <form onsubmit="return validateLogin()">
+            Username:
+            <input type="text" id="username"><br><br>
+
+            Password:
+            <input type="password" id="loginpwd"><br><br>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+
+    <div id="cart" style="display:none;">
+        <h2>Cart Page</h2>
+
+        <form onsubmit="return validateCart()">
+
+            Product:
+            <select>
+                <option>Laptop</option>
+                <option>Mobile</option>
+                <option>Headphones</option>
+            </select>
+
+            <br><br>
+
+            Quantity:
+            <input type="number" id="qty">
+
+            <br><br>
+
+            <input type="submit" value="Add To Cart">
+        </form>
+    </div>
+
+  
+
+    <div id="thankyou" style="display:none;">
+        <h2>Thank You</h2>
+        <p>Thank you for your purchase. Your order is being processed.</p>
+    </div>
+
+</body>
+</html>

@@ -1,89 +1,308 @@
-const express = require('express');
-
-const app = express();
-const PORT = 3000;
-
-// Middleware
-app.use(express.json());
-
-// In-memory database
-let students = [];
-
-// CREATE - Add student
-app.post('/students', (req, res) => {
-    const { id, name, age, course } = req.body;
-
-    if (!id || !name || !age || !course) {
-        return res.status(400).json({ message: "All fields are required" });
-    }
-
-    const exists = students.find(s => s.id === id);
-    if (exists) {
-        return res.status(400).json({ message: "Student already exists" });
-    }
-
-    const newStudent = { id, name, age, course };
-    students.push(newStudent);
-
-    res.status(201).json({
-        message: "Student added successfully",
-        student: newStudent
-    });
-});
-
-// READ - Get all students
-app.get('/students', (req, res) => {
-    res.json(students);
-});
-
-// READ - Get student by ID
-app.get('/students/:id', (req, res) => {
-    const student = students.find(s => s.id == req.params.id);
-
-    if (!student) {
-        return res.status(404).json({ message: "Student not found" });
-    }
-
-    res.json(student);
-});
-
-// UPDATE
-app.put('/students/:id', (req, res) => {
-    const student = students.find(s => s.id == req.params.id);
-
-    if (!student) {
-        return res.status(404).json({ message: "Student not found" });
-    }
-
-    const { name, age, course } = req.body;
-
-    if (name) student.name = name;
-    if (age) student.age = age;
-    if (course) student.course = course;
-
-    res.json({
-        message: "Updated successfully",
-        student
-    });
-});
-
-// DELETE
-app.delete('/students/:id', (req, res) => {
-    const index = students.findIndex(s => s.id == req.params.id);
-
-    if (index === -1) {
-        return res.status(404).json({ message: "Student not found" });
-    }
-
-    const deleted = students.splice(index, 1);
-
-    res.json({
-        message: "Deleted successfully",
-        student: deleted[0]
-    });
-});
-
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+<html>
+<frameset rows="25%,*">
+<frame src="top.html"name="top" scrolling ="no" frameborder ="0">
+<frameset cols="25%,75%">
+<frame src="left.html" name="left"scrolling ="no" frameborder="0">
+<frame src="right.html" name="right" scrolling ="auto" frameborder="0">
+</frameset></frameset></html>
+top.html
+<html>
+<bodybgcolor="pink">
+<br><br>
+<marquee><h1align=” center” >
+<b><u>ONLINEBOOKSTORAGE</u></b></h1>
+</marquee>
+</body>
+</html>
+left.html
+<html>
+<bodybgcolor="pink">
+<h3>
+<ul>
+<li><a href="login1.html" target="right">
+<font color="black">LOGIN</font></a></li><br><br>
+<li><a href="profile1.html" target="right">
+<font color="black">USERPROFILE</font></a></li><br><br>
+<li><a href="catalog1.html" target="right">
+<font color="black">BOOKSCATALOG</font></a></li><br><br>
+<li><a href="scart1.html" target="right">
+<font color="black">SHOPPINGCART</font></a></li><br><br>
+<li><a href="paymentbycreditcard.html" target="right">
+<font color="black">PAYMENT</font></a></li><br><br><br><br>
+</ul>
+</body>
+</html>
+right.html
+<html>
+<body>
+<br><br><br><br><br>
+<h2align="center">
+<b><p>welcome toonlinebookstorage.Pressloginif you arehaving id</p></b></h2>
+</body></html>
+login1.html
+<html>
+<bodybgcolor="pink"><br><br><br>
+<script type="text/javascript">
+function validate()
+{
+var flag=1;
+if(document.myform.id.value==""|| document.myform.pwd.value=="")
+{
+a
+lert("LoginId and Password must be filled");
+flag=0;
+}
+if(flag==1)
+{
+a
+lert("VALID INPUT");
+window.open("catalog1.html","right");
+}
+else
+{
+a
+lert("INVALID INPUT");
+document.myform.focus();
+}
+}
+</script>
+<form name="myform">
+<div align="center"><pre>
+LOGINID:<input type="text" name="id"><br>
+PASSWORD:<inputtype="password" name="pwd"><br><br></pre>
+<input type="button" value="ok"onClick="validate()">
+<input type="reset" value="clear">
+</div>
+</form>
+</body>
+</html>
+profile1.html
+<html>
+<bodybgcolor="pink"><br><br>
+<script type="text/javascript">
+function validate()
+{
+varflag=1;
+if(document.myform.name.value==""|| document.myform.addr.value==""||
+document.myform.phno.value==""|| document.myform.id.value==""||
+document.myform.pwd.value=="")
+{
+a
+lert("Enter all the details");
+flag=0;
+}
+varstr=document.myform.phno.value;
+varx=newRegExp("^[0-9]{10}");
+if(!(str.match(x)))
+{
+if(!(str.length==10))
+flag=0;
+}
+varstr1=document.myform.id.value;
+varx1=newRegExp("^[A-Z][a-zA-Z]+$","g");
+if(!(str1.match(x1)))
+{
+flag=0;
+a
+lert("Invalid UserID");
+}
+varstr1=document.myform.pwd.value;
+varx1=newRegExp("^[A-Z][a-zA-Z]+$","g");
+if(!(str1.match(x1)))
+{
+flag=0;
+a
+lert("Invalid password");
+}
+if(flag==1)
+{
+a
+lert("VALID INPUT");
+window.self.location.href="login1.html";
+}
+else
+{
+lert("INVALID INPUT");
+a
+document.myform.focus();
+}
+}
+</script>
+<form name="myform">
+<div align="center"><pre>
+NAME:<inputtype="text" name="name"><br>
+ADDRESS:<inputtype="type"name="addr"><br>
+CONTACTNUMBER:<inputtype="text" name="phno"><br>
+LOGINID:<input type="text" name="id"><br>
+PASSWORD:<inputtype="password" name="pwd"></pre><br><br>
+</div>
+<br><br>
+<div align="center">
+<input type="button" value="ok"onClick="validate()">
+<input type="reset" value="clear">
+</form>
+</body>
+</html>
+catalog1.html
+<html>
+<bodybgcolor="pink"><br><br><br>
+<html>
+<head>
+<title>bookscatalog</title>
+</head>
+<bodybgcolor="cyan">
+<center><h1>AMAZON</h1></center>
+<form method="post" action="scart1.html"target="right">
+<left>
+<table>
+<tr>
+<td><b><h3>ProgrammingLanguage books</h3></b></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td><h4>C</h4></td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Python</h4></td>
+</tr>
+<tr>
+<td></td>
+<td><h4>jsp</h4>
+</td></tr>
+<tr>
+<td><b><h3>Backendbooks</h3></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Oracle</h4></td>
+</tr>
+<tr>
+<td></td>
+<td><h4>MsSQLServer</h4>
+</td></tr>
+<tr>
+<td></td>
+<td><h4>MySQL</h4></td>
+</tr>
+</table>
+</h4>
+<center>
+<b>for buyoneofthesebooks
+<br>
+</b><input type="submit" value="click here">
+</center>
+</form>
+</body>
+</html>
+scart1.html
+<html>
+<bodybgcolor="pink"><br><br><br>
+<script language="javascript">
+function validate()
+{
+varflag=1;
+if(document.myform.title.value=="")
+{
+flag=0;
+}
+str=document.myform.title.value;
+if(str=="c"||str=="C")
+{
+document.myform.t1.value="C";
+document.myform.t2.value=444;
+}
+else if(str=="jsp"||str=="JSP")
+{
+document.myform.t1.value="JSP";
+document.myform.t2.value=555;
+}
+else
+{
+flag=0;
+}
+if(flag==1)
+{
+a
+lert("VALID INPUT");
+window.open("paymentbycreditcard.html","right");
+}
+else
+{
+a
+lert("INVALID INPUT");
+document.myform.focus();
+}
+}
+</script>
+<form name="myform">
+<div align="center"><pre>
+TITLE:<input type="text" name="title"><br>
+NO.OFBOOKS:<inputtype="text" name="no"><br>
+COSTOFBOOK:<inputtype="text"name="cost"><br>
+</pre><br><br></div>
+<br><br>
+<div align="center">
+<input type="submit"value="ok"onClick="validate()">
+<input type="reset" value="clear">
+</form>
+</body>
+</html>
+paymentbycreditcard.html
+<html>
+<bodybgcolor="pink"><br><br><br>
+<script language="javascript">
+function validate()
+{
+varflag=1;
+if(document.myform.amount.value==""|| document.myform.num.value=="")
+{
+flag=0;
+}
+varstr=document.myform.amount.value;
+varx=newRegExp("\\d","g");
+if(!(str.match(x)))
+{
+flag=0;
+}
+varstr1=document.myform.num.value;
+varx1=newRegExp("\\d","g");
+if(!(str.match(x1)))
+{
+flag=0;
+}
+if(flag==1)
+{
+a
+lert("VALID INPUT");
+window.self.location.href="order1.html";
+}
+else
+{
+a
+lert("INVALID INPUT");
+document.myform.focus();
+}
+}
+</script>
+<form name="myform">
+<div align="center"><pre>
+AMOUNT:<inputtype="text"name="amount"><br>
+CREDITCARDNUMBER:<inputtype="PASSWORD"name="num"><br></pre><br><br>
+</div><br><br>
+<div align="center">
+<input type="button" value="ok"onClick="validate()">
+<input type="reset" value="clear">
+</form></body></html>
+order1.html
+<html>
+<head><title>order conformation</title><M/head>
+<bodybgcolor="cyan">
+<center>
+<h1><b>AMAZON</h1>
+<pre><strong>
+<b>Yourorder IsConformed
+</strong></pre>
+<h2><b>THANKYOU</h2>
+</center></body></html>
