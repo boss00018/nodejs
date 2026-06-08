@@ -306,3 +306,142 @@ order1.html
 </strong></pre>
 <h2><b>THANKYOU</h2>
 </center></body></html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 350px;
+        }
+        h2 {
+            color: blue;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 5px;
+        }
+    </style>
+
+    <script>
+        // Registration Validation
+        function validateRegistration() {
+            let name = document.getElementById("regName").value;
+            let email = document.getElementById("regEmail").value;
+            let password = document.getElementById("regPassword").value;
+
+            if (name === "") {
+                alert("Name is required");
+                return false;
+            }
+
+            if (!email.includes("@")) {
+                alert("Enter a valid Email");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must contain at least 6 characters");
+                return false;
+            }
+
+            alert("Registration Successful");
+            return true;
+        }
+
+        // Login Validation
+        function validateLogin() {
+            let username = document.getElementById("loginUser").value;
+            let password = document.getElementById("loginPassword").value;
+
+            if (username === "" || password === "") {
+                alert("All fields are required");
+                return false;
+            }
+
+            alert("Login Successful");
+            return true;
+        }
+
+        // Catalog Validation
+        function addToCart() {
+            let quantity = document.getElementById("qty").value;
+
+            if (quantity === "" || quantity <= 0) {
+                alert("Please enter a valid quantity");
+                return false;
+            }
+
+            alert("Product Added to Cart Successfully");
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Shopping Cart Application</h1>
+
+    <!-- Registration Page -->
+    <div class="section">
+        <h2>Registration Page</h2>
+        <form onsubmit="return validateRegistration()">
+            Name:<br>
+            <input type="text" id="regName"><br>
+
+            Email:<br>
+            <input type="text" id="regEmail"><br>
+
+            Password:<br>
+            <input type="password" id="regPassword"><br><br>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <!-- Login Page -->
+    <div class="section">
+        <h2>Login Page</h2>
+        <form onsubmit="return validateLogin()">
+            Username:<br>
+            <input type="text" id="loginUser"><br>
+
+            Password:<br>
+            <input type="password" id="loginPassword"><br><br>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <!-- Catalog Page -->
+    <div class="section">
+        <h2>Catalog Page</h2>
+        <p><b>Product:</b> Laptop</p>
+        <p><b>Price:</b> ₹50,000</p>
+
+        Quantity:
+        <input type="number" id="qty"><br><br>
+
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+</body>
+</html>
