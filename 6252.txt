@@ -1,0 +1,203 @@
+Sjf....#include <stdio.h>
+
+int main()
+{
+    int n, i, j, temp;
+    int bt[20], wt[20], tat[20];
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter Burst Time for P%d: ", i + 1);
+        scanf("%d", &bt[i]);
+    }
+
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = i + 1; j < n; j++)
+        {
+            if(bt[i] > bt[j])
+            {
+                temp = bt[i];
+                bt[i] = bt[j];
+                bt[j] = temp;
+            }
+        }
+    }
+
+    wt[0] = 0;
+
+    for(i = 1; i < n; i++)
+        wt[i] = wt[i - 1] + bt[i - 1];
+
+    for(i = 0; i < n; i++)
+        tat[i] = wt[i] + bt[i];
+
+    printf("\nBT\tWT\tTAT\n");
+
+    for(i = 0; i < n; i++)
+        printf("%d\t%d\t%d\n", bt[i], wt[i], tat[i]);
+
+    return 0;
+}
+
+
+
+Round Robin....#include <stdio.h>
+
+int main()
+{
+    int n, i, tq;
+    int bt[20], rt[20];
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter Burst Time for P%d: ", i + 1);
+        scanf("%d", &bt[i]);
+        rt[i] = bt[i];
+    }
+
+    printf("Enter Time Quantum: ");
+    scanf("%d", &tq);
+
+    printf("\nExecution Order:\n");
+
+    while(1)
+    {
+        int done = 1;
+
+        for(i = 0; i < n; i++)
+        {
+            if(rt[i] > 0)
+            {
+                done = 0;
+
+                if(rt[i] > tq)
+                {
+                    printf("P%d ", i + 1);
+                    rt[i] -= tq;
+                }
+                else
+                {
+                    printf("P%d ", i + 1);
+                    rt[i] = 0;
+                }
+            }
+        }
+
+        if(done)
+            break;
+    }
+
+    return 0;
+}
+
+
+
+
+Paging memory.....
+#include <stdio.h>
+
+int main()
+{
+    int pageSize, logicalAddress;
+    int pageNumber, offset;
+
+    printf("Enter Page Size: ");
+    scanf("%d", &pageSize);
+
+    printf("Enter Logical Address: ");
+    scanf("%d", &logicalAddress);
+
+    pageNumber = logicalAddress / pageSize;
+    offset = logicalAddress % pageSize;
+
+    printf("\nPage Number = %d", pageNumber);
+    printf("\nOffset = %d\n", offset);
+
+    return 0;
+}
+
+
+
+
+
+
+Priority....
+#include <stdio.h>
+
+int main()
+{
+    int n, i;
+    int at[20], bt[20], pr[20];
+    int wt[20], tat[20], ct[20];
+    int visited[20] = {0};
+
+    int completed = 0, time = 0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("\nP%d\n", i + 1);
+
+        printf("Arrival Time: ");
+        scanf("%d", &at[i]);
+
+        printf("Burst Time: ");
+        scanf("%d", &bt[i]);
+
+        printf("Priority: ");
+        scanf("%d", &pr[i]);
+    }
+
+    while(completed < n)
+    {
+        int idx = -1;
+        int highest = 9999;
+
+        for(i = 0; i < n; i++)
+        {
+            if(at[i] <= time && !visited[i])
+            {
+                if(pr[i] < highest)
+                {
+                    highest = pr[i];
+                    idx = i;
+                }
+            }
+        }
+
+        if(idx != -1)
+        {
+            ct[idx] = time + bt[idx];
+            time = ct[idx];
+
+            tat[idx] = ct[idx] - at[idx];
+            wt[idx] = tat[idx] - bt[idx];
+
+            visited[idx] = 1;
+            completed++;
+        }
+        else
+        {
+            time++;
+        }
+    }
+
+    printf("\nP\tAT\tBT\tPR\tWT\tTAT\n");
+
+    for(i = 0; i < n; i++)
+    {
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\n",
+               i + 1, at[i], bt[i], pr[i], wt[i], tat[i]);
+    }
+
+    return 0;
+}
