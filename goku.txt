@@ -1,447 +1,234 @@
-<html>
-<frameset rows="25%,*">
-<frame src="top.html"name="top" scrolling ="no" frameborder ="0">
-<frameset cols="25%,75%">
-<frame src="left.html" name="left"scrolling ="no" frameborder="0">
-<frame src="right.html" name="right" scrolling ="auto" frameborder="0">
-</frameset></frameset></html>
-top.html
-<html>
-<bodybgcolor="pink">
-<br><br>
-<marquee><h1align=” center” >
-<b><u>ONLINEBOOKSTORAGE</u></b></h1>
-</marquee>
-</body>
-</html>
-left.html
-<html>
-<bodybgcolor="pink">
-<h3>
-<ul>
-<li><a href="login1.html" target="right">
-<font color="black">LOGIN</font></a></li><br><br>
-<li><a href="profile1.html" target="right">
-<font color="black">USERPROFILE</font></a></li><br><br>
-<li><a href="catalog1.html" target="right">
-<font color="black">BOOKSCATALOG</font></a></li><br><br>
-<li><a href="scart1.html" target="right">
-<font color="black">SHOPPINGCART</font></a></li><br><br>
-<li><a href="paymentbycreditcard.html" target="right">
-<font color="black">PAYMENT</font></a></li><br><br><br><br>
-</ul>
-</body>
-</html>
-right.html
-<html>
-<body>
-<br><br><br><br><br>
-<h2align="center">
-<b><p>welcome toonlinebookstorage.Pressloginif you arehaving id</p></b></h2>
-</body></html>
-login1.html
-<html>
-<bodybgcolor="pink"><br><br><br>
-<script type="text/javascript">
-function validate()
-{
-var flag=1;
-if(document.myform.id.value==""|| document.myform.pwd.value=="")
-{
-a
-lert("LoginId and Password must be filled");
-flag=0;
-}
-if(flag==1)
-{
-a
-lert("VALID INPUT");
-window.open("catalog1.html","right");
-}
-else
-{
-a
-lert("INVALID INPUT");
-document.myform.focus();
-}
-}
-</script>
-<form name="myform">
-<div align="center"><pre>
-LOGINID:<input type="text" name="id"><br>
-PASSWORD:<inputtype="password" name="pwd"><br><br></pre>
-<input type="button" value="ok"onClick="validate()">
-<input type="reset" value="clear">
-</div>
-</form>
-</body>
-</html>
-profile1.html
-<html>
-<bodybgcolor="pink"><br><br>
-<script type="text/javascript">
-function validate()
-{
-varflag=1;
-if(document.myform.name.value==""|| document.myform.addr.value==""||
-document.myform.phno.value==""|| document.myform.id.value==""||
-document.myform.pwd.value=="")
-{
-a
-lert("Enter all the details");
-flag=0;
-}
-varstr=document.myform.phno.value;
-varx=newRegExp("^[0-9]{10}");
-if(!(str.match(x)))
-{
-if(!(str.length==10))
-flag=0;
-}
-varstr1=document.myform.id.value;
-varx1=newRegExp("^[A-Z][a-zA-Z]+$","g");
-if(!(str1.match(x1)))
-{
-flag=0;
-a
-lert("Invalid UserID");
-}
-varstr1=document.myform.pwd.value;
-varx1=newRegExp("^[A-Z][a-zA-Z]+$","g");
-if(!(str1.match(x1)))
-{
-flag=0;
-a
-lert("Invalid password");
-}
-if(flag==1)
-{
-a
-lert("VALID INPUT");
-window.self.location.href="login1.html";
-}
-else
-{
-lert("INVALID INPUT");
-a
-document.myform.focus();
-}
-}
-</script>
-<form name="myform">
-<div align="center"><pre>
-NAME:<inputtype="text" name="name"><br>
-ADDRESS:<inputtype="type"name="addr"><br>
-CONTACTNUMBER:<inputtype="text" name="phno"><br>
-LOGINID:<input type="text" name="id"><br>
-PASSWORD:<inputtype="password" name="pwd"></pre><br><br>
-</div>
-<br><br>
-<div align="center">
-<input type="button" value="ok"onClick="validate()">
-<input type="reset" value="clear">
-</form>
-</body>
-</html>
-catalog1.html
-<html>
-<bodybgcolor="pink"><br><br><br>
-<html>
-<head>
-<title>bookscatalog</title>
-</head>
-<bodybgcolor="cyan">
-<center><h1>AMAZON</h1></center>
-<form method="post" action="scart1.html"target="right">
-<left>
-<table>
-<tr>
-<td><b><h3>ProgrammingLanguage books</h3></b></td>
-<td></td></tr>
-<tr>
-<td></td>
-<td><h4>C</h4></td>
-</tr>
-<tr>
-<td></td>
-<td><h4>Python</h4></td>
-</tr>
-<tr>
-<td></td>
-<td><h4>jsp</h4>
-</td></tr>
-<tr>
-<td><b><h3>Backendbooks</h3></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><h4>Oracle</h4></td>
-</tr>
-<tr>
-<td></td>
-<td><h4>MsSQLServer</h4>
-</td></tr>
-<tr>
-<td></td>
-<td><h4>MySQL</h4></td>
-</tr>
-</table>
-</h4>
-<center>
-<b>for buyoneofthesebooks
-<br>
-</b><input type="submit" value="click here">
-</center>
-</form>
-</body>
-</html>
-scart1.html
-<html>
-<bodybgcolor="pink"><br><br><br>
-<script language="javascript">
-function validate()
-{
-varflag=1;
-if(document.myform.title.value=="")
-{
-flag=0;
-}
-str=document.myform.title.value;
-if(str=="c"||str=="C")
-{
-document.myform.t1.value="C";
-document.myform.t2.value=444;
-}
-else if(str=="jsp"||str=="JSP")
-{
-document.myform.t1.value="JSP";
-document.myform.t2.value=555;
-}
-else
-{
-flag=0;
-}
-if(flag==1)
-{
-a
-lert("VALID INPUT");
-window.open("paymentbycreditcard.html","right");
-}
-else
-{
-a
-lert("INVALID INPUT");
-document.myform.focus();
-}
-}
-</script>
-<form name="myform">
-<div align="center"><pre>
-TITLE:<input type="text" name="title"><br>
-NO.OFBOOKS:<inputtype="text" name="no"><br>
-COSTOFBOOK:<inputtype="text"name="cost"><br>
-</pre><br><br></div>
-<br><br>
-<div align="center">
-<input type="submit"value="ok"onClick="validate()">
-<input type="reset" value="clear">
-</form>
-</body>
-</html>
-paymentbycreditcard.html
-<html>
-<bodybgcolor="pink"><br><br><br>
-<script language="javascript">
-function validate()
-{
-varflag=1;
-if(document.myform.amount.value==""|| document.myform.num.value=="")
-{
-flag=0;
-}
-varstr=document.myform.amount.value;
-varx=newRegExp("\\d","g");
-if(!(str.match(x)))
-{
-flag=0;
-}
-varstr1=document.myform.num.value;
-varx1=newRegExp("\\d","g");
-if(!(str.match(x1)))
-{
-flag=0;
-}
-if(flag==1)
-{
-a
-lert("VALID INPUT");
-window.self.location.href="order1.html";
-}
-else
-{
-a
-lert("INVALID INPUT");
-document.myform.focus();
-}
-}
-</script>
-<form name="myform">
-<div align="center"><pre>
-AMOUNT:<inputtype="text"name="amount"><br>
-CREDITCARDNUMBER:<inputtype="PASSWORD"name="num"><br></pre><br><br>
-</div><br><br>
-<div align="center">
-<input type="button" value="ok"onClick="validate()">
-<input type="reset" value="clear">
-</form></body></html>
-order1.html
-<html>
-<head><title>order conformation</title><M/head>
-<bodybgcolor="cyan">
-<center>
-<h1><b>AMAZON</h1>
-<pre><strong>
-<b>Yourorder IsConformed
-</strong></pre>
-<h2><b>THANKYOU</h2>
-</center></body></html>
+#include<stdio.h>
 
+int main()
+{
+    int n,i;
+    int at[10],bt[10],pr[10];
+    int wt[10],tat[10],completed[10]={0};
 
+    int time=0,count=0;
 
+    printf("Enter number of processes: ");
+    scanf("%d",&n);
 
+    for(i=0;i<n;i++)
+    {
+        printf("Enter AT BT Priority for P%d: ",i+1);
+        scanf("%d%d%d",&at[i],&bt[i],&pr[i]);
+    }
 
+    while(count<n)
+    {
+        int pos=-1;
 
-
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shopping Cart Validation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 20px;
-            width: 350px;
-        }
-        h2 {
-            color: blue;
-        }
-        input, button {
-            margin: 5px 0;
-            padding: 5px;
-        }
-    </style>
-
-    <script>
-        // Registration Validation
-        function validateRegistration() {
-            let name = document.getElementById("regName").value;
-            let email = document.getElementById("regEmail").value;
-            let password = document.getElementById("regPassword").value;
-
-            if (name === "") {
-                alert("Name is required");
-                return false;
+        for(i=0;i<n;i++)
+        {
+            if(at[i]<=time && completed[i]==0)
+            {
+                if(pos==-1 || pr[i]<pr[pos])
+                    pos=i;
             }
-
-            if (!email.includes("@")) {
-                alert("Enter a valid Email");
-                return false;
-            }
-
-            if (password.length < 6) {
-                alert("Password must contain at least 6 characters");
-                return false;
-            }
-
-            alert("Registration Successful");
-            return true;
         }
 
-        // Login Validation
-        function validateLogin() {
-            let username = document.getElementById("loginUser").value;
-            let password = document.getElementById("loginPassword").value;
+        if(pos==-1)
+        {
+            time++;
+        }
+        else
+        {
+            wt[pos]=time-at[pos];
+            time=time+bt[pos];
+            tat[pos]=wt[pos]+bt[pos];
 
-            if (username === "" || password === "") {
-                alert("All fields are required");
-                return false;
-            }
+            completed[pos]=1;
+            count++;
+        }
+    }
 
-            alert("Login Successful");
-            return true;
+    printf("\nProcess\tWT\tTAT\n");
+
+    for(i=0;i<n;i++)
+        printf("P%d\t%d\t%d\n",i+1,wt[i],tat[i]);
+
+    return 0;
+}
+
+#include<stdio.h>
+
+int main()
+{
+    int ms,ps,nop,np,rempages;
+    int i,j,x,y,pa,offset;
+    int s[10],fno[10][20];
+
+    printf("Enter memory size: ");
+    scanf("%d",&ms);
+
+    printf("Enter page size: ");
+    scanf("%d",&ps);
+
+    nop=ms/ps;
+
+    printf("Number of pages available = %d\n",nop);
+
+    printf("Enter number of processes: ");
+    scanf("%d",&np);
+
+    rempages=nop;
+
+    for(i=0;i<np;i++)
+    {
+        printf("Enter number of pages required for P%d: ",i);
+        scanf("%d",&s[i]);
+
+        if(s[i]>rempages)
+        {
+            printf("Memory is Full\n");
+            break;
         }
 
-        // Catalog Validation
-        function addToCart() {
-            let quantity = document.getElementById("qty").value;
+        rempages=rempages-s[i];
 
-            if (quantity === "" || quantity <= 0) {
-                alert("Please enter a valid quantity");
-                return false;
+        printf("Enter page table for P%d:\n",i);
+
+        for(j=0;j<s[i];j++)
+            scanf("%d",&fno[i][j]);
+    }
+
+    printf("\nEnter Process No, Page No and Offset: ");
+    scanf("%d%d%d",&x,&y,&offset);
+
+    if(x>=np || y>=s[x] || offset>=ps)
+    {
+        printf("Invalid Process/Page Number/Offset");
+    }
+    else
+    {
+        pa=fno[x][y]*ps+offset;
+        printf("Physical Address = %d",pa);
+    }
+
+    return 0;
+}
+
+
+
+
+
+#include<stdio.h>
+
+int main()
+{
+    int n,i,time=0,remain,tq;
+    int at[10],bt[10],rt[10];
+    int wt[10]={0},tat[10];
+
+    printf("Enter number of processes: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+    {
+        printf("Enter AT and BT for P%d: ",i+1);
+        scanf("%d%d",&at[i],&bt[i]);
+        rt[i]=bt[i];
+    }
+
+    printf("Enter Time Quantum: ");
+    scanf("%d",&tq);
+
+    remain=n;
+    i=0;
+
+    while(remain!=0)
+    {
+        if(rt[i]>0 && at[i]<=time)
+        {
+            if(rt[i]<=tq)
+            {
+                time=time+rt[i];
+                rt[i]=0;
+
+                tat[i]=time-at[i];
+                wt[i]=tat[i]-bt[i];
+
+                remain--;
             }
-
-            alert("Product Added to Cart Successfully");
-            return true;
+            else
+            {
+                rt[i]=rt[i]-tq;
+                time=time+tq;
+            }
         }
-    </script>
-</head>
+        else if(at[i]>time)
+        {
+            time++;
+        }
 
-<body>
+        i=(i+1)%n;
+    }
 
-    <h1>Shopping Cart Application</h1>
+    printf("\nProcess\tWT\tTAT\n");
 
-    <!-- Registration Page -->
-    <div class="section">
-        <h2>Registration Page</h2>
-        <form onsubmit="return validateRegistration()">
-            Name:<br>
-            <input type="text" id="regName"><br>
+    for(i=0;i<n;i++)
+        printf("P%d\t%d\t%d\n",i+1,wt[i],tat[i]);
 
-            Email:<br>
-            <input type="text" id="regEmail"><br>
+    return 0;
+}
 
-            Password:<br>
-            <input type="password" id="regPassword"><br><br>
 
-            <input type="submit" value="Register">
-        </form>
-    </div>
+#include<stdio.h>
 
-    <!-- Login Page -->
-    <div class="section">
-        <h2>Login Page</h2>
-        <form onsubmit="return validateLogin()">
-            Username:<br>
-            <input type="text" id="loginUser"><br>
+int main()
+{
+    int n,i,j;
+    int bt[10],pr[10],pid[10];
+    int wt[10],tat[10];
 
-            Password:<br>
-            <input type="password" id="loginPassword"><br><br>
+    printf("Enter number of processes: ");
+    scanf("%d",&n);
 
-            <input type="submit" value="Login">
-        </form>
-    </div>
+    for(i=0;i<n;i++)
+    {
+        pid[i]=i+1;
+        printf("Enter BT and Priority for P%d: ",i+1);
+        scanf("%d%d",&bt[i],&pr[i]);
+    }
 
-    <!-- Catalog Page -->
-    <div class="section">
-        <h2>Catalog Page</h2>
-        <p><b>Product:</b> Laptop</p>
-        <p><b>Price:</b> ₹50,000</p>
+    for(i=0;i<n-1;i++)
+    {
+        for(j=i+1;j<n;j++)
+        {
+            if(pr[i]>pr[j])
+            {
+                int temp;
 
-        Quantity:
-        <input type="number" id="qty"><br><br>
+                temp=pr[i];
+                pr[i]=pr[j];
+                pr[j]=temp;
 
-        <button onclick="addToCart()">Add to Cart</button>
-    </div>
+                temp=bt[i];
+                bt[i]=bt[j];
+                bt[j]=temp;
 
-</body>
-</html>
+                temp=pid[i];
+                pid[i]=pid[j];
+                pid[j]=temp;
+            }
+        }
+    }
+
+    wt[0]=0;
+
+    for(i=1;i<n;i++)
+        wt[i]=wt[i-1]+bt[i-1];
+
+    for(i=0;i<n;i++)
+        tat[i]=wt[i]+bt[i];
+
+    printf("\nPID\tWT\tTAT\n");
+
+    for(i=0;i<n;i++)
+        printf("P%d\t%d\t%d\n",pid[i],wt[i],tat[i]);
+
+    return 0;
+}
